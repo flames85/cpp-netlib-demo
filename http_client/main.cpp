@@ -11,7 +11,9 @@ int main() {
     try {
         //! 1. request
         // client
-        http::client client;
+        http::client::options options;
+        // set timeout
+        http::client client(options.timeout(2));
         // make url
         uri::uri url;
         url << uri::scheme("http") << uri::host("127.0.0.1:12345") << uri::path("/cpp-netlib");

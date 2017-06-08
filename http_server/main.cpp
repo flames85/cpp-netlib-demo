@@ -50,15 +50,15 @@ struct hello_world {
                                                     {"Content-Type", "text/plain"},
                                                     {"From", "server-demo"},
                                                     {"Content-Length", "0"}};
+        // 更新content-length
+        std::string body = "hello !!!";
+        headers[3].value = std::to_string(body.length());
 
         // status
         connection->set_status(server::connection::ok);
         // headers
         connection->set_headers(boost::make_iterator_range(headers, headers + 4));
 
-        // 更新content-length
-        std::string body = "hello !!!";
-        headers[3].value = std::to_string(body.length());
         // body
         connection->write(body);
     }

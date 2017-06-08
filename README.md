@@ -33,6 +33,7 @@ sudo apt-get install libssl-dev
 通过命令行编译：
 
 ```bash
+cd cpp-netlib-0.12.0-final
 mkdir build
 cd build
 
