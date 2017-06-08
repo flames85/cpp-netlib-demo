@@ -9,7 +9,7 @@ github：https://github.com/cpp-netlib/cpp-netlib
 依赖：
 
  + boost（[cpp-netlib-0.12.0-final ](https://github.com/cpp-netlib/cpp-netlib/releases/tag/cpp-netlib-0.12.0-final)版需要boost1.57）
-+ openssl
++ openssl(version>=1.0.2, 用1.0.1版本 make test 失败)
 + cmake版本>=2.8
 + 支持c++11的c++编译器
 
@@ -40,7 +40,6 @@ cmake -DCMAKE_BUILD_TYPE=Debug \
   -DCPP-NETLIB_ENABLE_HTTPS=ON \
   -DCPP-NETLIB_BUILD_TESTS=ON \
   -DCPP-NETLIB_BUILD_EXAMPLES=ON \
-  -DOPENSSL_ROOT_DIR=/opt/openssl \
   -DCMAKE_CXX_FLAGS="-std=c++11 ${CMAKE_CXX_FLAGS}" \
   -DCMAKE_INSTALL_PREFIX=/opt/cpp-netlib \
   ..
@@ -61,5 +60,6 @@ sudo cp /home/shaoqi/source/cpp-netlib-0.12.0-final/deps/asio/asio/include/asio 
 
 #### 4. 根据官方例子写的更详细的例子
 
-
++ http_client
++ http_server
 
