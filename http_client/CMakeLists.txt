@@ -20,17 +20,14 @@ if(DEFINED CPP_NETLIB_PATH)
     LINK_DIRECTORIES(${CPP_NETLIB_LIBRARY_DIR})
     SET(CPP_NETLIB_LIBRARIES
             libcppnetlib-client-connections.a
-            libcppnetlib-server-parsers.a
             libcppnetlib-uri.a
-            libgmock.a
-            libgmock_main.a
             )
 
     message(STATUS "CPP_NETLIB_INCLUDE_DIR: ${CPP_NETLIB_INCLUDE_DIR}")
     message(STATUS "CPP_NETLIB_LIBRARY_DIR: ${CPP_NETLIB_LIBRARY_DIR}")
     message(STATUS "CPP_NETLIB_LIBRARIES: ${CPP_NETLIB_LIBRARIES}")
 else()
-    message(SEND_ERROR "Please set PROTOBUF_PATH")
+    message(SEND_ERROR "Please set CPP_NETLIB_PATH")
 endif()
 
 ##### openssl

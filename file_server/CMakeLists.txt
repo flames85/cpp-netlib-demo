@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(http_server)
+project(file_server)
 set(CMAKE_CXX_STANDARD 11)
 
 ########################################
@@ -30,7 +30,7 @@ else()
 endif()
 
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES fileserver.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 

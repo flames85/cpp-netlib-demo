@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(http_server)
+project(file_download)
 set(CMAKE_CXX_STANDARD 11)
 
 ########################################
@@ -15,11 +15,12 @@ if(DEFINED CPP_NETLIB_PATH)
     SET(CPP_NETLIB_LIBRARY_DIR ${CPP_NETLIB_PATH}/lib)
 
     INCLUDE_DIRECTORIES(${CPP_NETLIB_INCLUDE_DIR})
-#    INCLUDE_DIRECTORIES(${CPP_NETLIB_INCLUDE_DIR}/boost)
+    #    INCLUDE_DIRECTORIES(${CPP_NETLIB_INCLUDE_DIR}/boost)
 
     LINK_DIRECTORIES(${CPP_NETLIB_LIBRARY_DIR})
     SET(CPP_NETLIB_LIBRARIES
-            libcppnetlib-server-parsers.a
+            libcppnetlib-client-connections.a
+            libcppnetlib-uri.a
             )
 
     message(STATUS "CPP_NETLIB_INCLUDE_DIR: ${CPP_NETLIB_INCLUDE_DIR}")
@@ -29,12 +30,15 @@ else()
     message(SEND_ERROR "Please set CPP_NETLIB_PATH")
 endif()
 
+##### openssl
+find_package(OpenSSL)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES simple_wget.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_link_libraries(${PROJECT_NAME}
         ${CPP_NETLIB_LIBRARIES}
+        ${OPENSSL_LIBRARIES}
         pthread
         )

@@ -59,8 +59,11 @@ sudo cp /home/shaoqi/source/cpp-netlib-0.12.0-final/deps/asio/asio/include/asio 
 
 官方网页上的例子是旧版的!(可是为何都0.12版了，还在用老版的根本编译不过的example？)
 
-#### 4. 根据官方例子写的更详细的例子
+#### 4. 根据官方例子写的更详细的例子, 都是http协议相关
 
 + http_client
 + http_server
++ file_server
++ file_download
+
 
