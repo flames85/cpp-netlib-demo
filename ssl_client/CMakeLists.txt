@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(http_client)
+project(ssl_client)
 set(CMAKE_CXX_STANDARD 11)
 
 ########################################
@@ -8,6 +8,9 @@ if($ENV{CLION_IDE})
     SET(CPP_NETLIB_PATH "/opt/cpp-netlib")
 endif()
 ########################################
+
+add_definitions(-DBOOST_NETWORK_DEBUG)
+add_definitions(-DBOOST_NETWORK_ENABLE_HTTPS)
 
 ###### cpp-netlib
 if(DEFINED CPP_NETLIB_PATH)
@@ -32,7 +35,7 @@ endif()
 ##### openssl
 find_package(OpenSSL)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES client.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
