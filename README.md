@@ -50,6 +50,7 @@ make test
 sudo make install
 # 我不知道为什么这块头文件不能通过make install部署。
 sudo cp /home/shaoqi/source/cpp-netlib-0.12.0-final/deps/asio/asio/include/asio /opt/cpp-netlib/include -r
+sudo cp /home/shaoqi/source/cpp-netlib-0.12.0-final/deps/asio/asio/include/asio/asio.hpp /opt/cpp-netlib/include 
 ```
 
 
@@ -57,13 +58,14 @@ sudo cp /home/shaoqi/source/cpp-netlib-0.12.0-final/deps/asio/asio/include/asio 
 
 位置在`cpp-netlib-0.12.0-final/libs/network/example`
 
-官方网页上的例子是旧版的!(可是为何都0.12版了，还在用老版的根本编译不过的example？)
+官方网页上的例子有些问题. 
 
-#### 4. 根据官方例子写的更详细(甚至修复了官方例子中的bug)的例子, 都是http协议相关
+#### 4. 根据官方例子写的更详细的例子, 都是http协议相关
 
 + http_client
 + http_server
 + file_server
 + file_download
-
++ ssl_server
++ ssl_client (todo)
 

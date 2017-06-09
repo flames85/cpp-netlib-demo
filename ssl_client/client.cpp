@@ -1,5 +1,5 @@
 #include <boost/network/protocol/http/client.hpp>
-#include <iostream
+#include <iostream>
 #include <asio/ssl.hpp>
 
 namespace http = boost::network::http;
@@ -8,7 +8,9 @@ namespace http = boost::network::http;
 int main() {
     try {
         http::client::options options;
-        http::client client(options.openssl_verify_path("../../my_cert/rootCA.pem"));
+        http::client client(options.openssl_verify_path("../../certificate/rootCA.pem")
+                                    .openssl_certificate("../../certificate/client.crt")
+                                    .openssl_private_key_file("../../certificate/server.key"));
 
         http::client::request request("https://127.0.0.1:3344");
         http::client::response response = client.get(request);

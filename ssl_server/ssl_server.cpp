@@ -77,6 +77,7 @@ void shut_me_down(const std::error_code& error, int signal,
     if (!error) p_server_instance->stop();
 }
 
+// 双向认证
 #define VERIFY_CLIENT
 
 // 测试: curl -v https://127.0.0.1:3344 --cacert rootCA.pem
