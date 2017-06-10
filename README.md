@@ -49,8 +49,8 @@ make -j4
 make test
 sudo make install
 # 我不知道为什么这块头文件不能通过make install部署。
-sudo cp /home/shaoqi/source/cpp-netlib-0.12.0-final/deps/asio/asio/include/asio /opt/cpp-netlib/include -r
-sudo cp /home/shaoqi/source/cpp-netlib-0.12.0-final/deps/asio/asio/include/asio/asio.hpp /opt/cpp-netlib/include 
+sudo cp ../deps/asio/asio/include/asio /opt/cpp-netlib/include -r
+sudo cp ../deps/asio/asio/include/asio/asio.hpp /opt/cpp-netlib/include 
 ```
 
 
