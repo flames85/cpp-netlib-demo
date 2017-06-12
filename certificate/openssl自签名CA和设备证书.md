@@ -118,11 +118,11 @@ openssl x509 -req -in client-req.csr -out client-cert.pem -signkey client-key.pe
 
 #### 4. 文件使用
 ```
-ca-cert.pem                                 [CA证书, 用于client/server]
-server-cert.pem                          [服务端证书/公钥]
-server-key.pem                           [服务端密钥]
-client-cert.pem                           [客户端证书/公钥]
-client-key.pem                            [客户端密钥]
+ca-cert.pem            [CA证书, 用于client/server]
+server-cert.pem        [服务端证书/公钥]
+server-key.pem         [服务端密钥]
+client-cert.pem        [客户端证书/公钥]
+client-key.pem         [客户端密钥]
 ```
 __如果给私钥设置了密码, 如:__
 ```bash
