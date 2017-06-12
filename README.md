@@ -62,10 +62,11 @@ sudo cp ../deps/asio/asio/include/asio/asio.hpp /opt/cpp-netlib/include
 
 #### 4. 根据官方例子写的更详细的例子, 都是http协议相关
 
-+ http_client
-+ http_server
-+ file_server
-+ file_download
-+ ssl_server
-+ ssl_client (todo)
++ http_server (http服务)
++ http_client (作为http_server测试客户端)
++ file_server (文件下载在服务)
++ file_download (作为file_server测试客户端)
++ ssl_server (https服务)
++ ssl_client (作为ssl_server测试客户端)
+
 

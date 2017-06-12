@@ -29,7 +29,7 @@ int main() {
 
         //! 2. response
         // response status
-        std::cout << status(response) << " " << status_message(response) << std::endl;
+        std::cout << response.version() << " " << status(response) << " " << status_message(response) << std::endl;
 
         // 遍历方式查看response headers
         auto headers = response.headers();

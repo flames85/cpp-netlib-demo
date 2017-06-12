@@ -1,22 +1,6 @@
-/*
- * Sample application based loosely on existing async server sample to
- *demonstrate ssl
- *
- * Requires openssl lib to run (https://www.openssl.org/)
- *
- * (C) Copyright Jelle Van den Driessche 2014.
- *
- * Distributed under the Boost Software License, Version 1.0. (See copy at
- * http://www.boost.org/LICENSE_1_0.txt)
- */
-
 #include <memory>
 #include <boost/network/include/http/server.hpp>
-
 #include <asio.hpp>
-#include <asio/ssl.hpp>
-#include <iostream>
-#include <signal.h>
 
 struct handler;
 typedef boost::network::http::server<handler> server;
@@ -24,23 +8,21 @@ typedef boost::network::http::server<handler> server;
 std::string password_callback(std::size_t max_length,
                               asio::ssl::context_base::password_purpose purpose)
 {
-    std::cout << "password_callback\n";
+    switch(purpose) {
+        case asio::ssl::context_base::for_reading:
+            std::cout << "password purpose for reading \n" ;
+            break;
+        case asio::ssl::context_base::for_writing:
+            std::cout << "password purpose for writing \n" ;
+            break;
+        default:
+            std::cout << "password purpose for unknow \n" ;
+            break;
+    }
+
+    std::cout << "password_callback!\n";
     return std::string("test");
 }
-
-/**
- * request + connection encapsulation (work item)
- */
-struct request_data
-{
-    const server::request req;
-    server::connection_ptr conn;
-
-    typedef std::shared_ptr<request_data> pointer;
-
-    request_data(server::request const& req, const server::connection_ptr& conn)
-            : req(req), conn(conn) {}
-};
 
 struct handler
 {
@@ -74,14 +56,15 @@ struct handler
 void shut_me_down(const std::error_code& error, int signal,
                   std::shared_ptr<server> p_server_instance)
 {
+    std::cout << "ok! i will shut down!\n";
     if (!error) p_server_instance->stop();
 }
 
 // 双向认证
 #define VERIFY_CLIENT
 
-// 测试: curl -v https://127.0.0.1:3344 --cacert rootCA.pem
-// 测试: curl -vvvv https://127.0.0.1:3344 --cacert rootCA.pem --cert client.crt --key client.key
+// 测试: curl -v https://127.0.0.1:3344 --cacert ca-cert.pem
+// 测试: curl -vvvv https://127.0.0.1:3344 --cacert ca-cert.pem --cert client-cert.pem --key client-key.pem
 int main(void) try
 {
     // setup asio::io_service
@@ -95,15 +78,12 @@ int main(void) try
                      asio::ssl::context::no_sslv2 |
                      asio::ssl::context::single_dh_use);
 
-    // Set keys
+    // 设置私钥的密码回调函数(会在private_key_file需要密码的时候调用)
     ctx->set_password_callback(password_callback);
 
-    // ca
-    ctx->load_verify_file("../../certificate/rootCA.pem");
-    // cert
-    ctx->use_certificate_file("../../certificate/server.crt", asio::ssl::context::pem);
-    // key
-    ctx->use_private_key_file("../../certificate/server.key", asio::ssl::context::pem);
+    ctx->load_verify_file("../../certificate/ca-cert.pem"); // ca
+    ctx->use_certificate_file("../../certificate/server-cert.pem", asio::ssl::context::pem); // server cert
+    ctx->use_private_key_file("../../certificate/server-key.pem", asio::ssl::context::pem); // server private key
 
 #ifdef VERIFY_CLIENT
     // 双向认证
