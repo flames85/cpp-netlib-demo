@@ -5,10 +5,9 @@
 ```bash
 openssl genrsa -out ca-key.pem 1024
 ```
-+  因为ca-key非常重要, 给它设置一个密码 (该操作是可选的, 如果这里设置了密码, 凡是使用到ca-key.pem的地方都要输入其密码)
++  可以为私钥添加密码(该操作可选, 添加完密码后, 凡是使用私钥都需要密码)
 ```bash
 openssl genrsa -des3 -out ca-key.pem 1024
-设置密码:1234
 ```
 + 创建证书请求[ca-req.csr]
 ```bash
@@ -27,7 +26,6 @@ An optional company name []:
 + 自签名[ca-cert.pem]
 ```bash
 openssl x509 -req -in ca-req.csr -out ca-cert.pem -signkey ca-key.pem -days 3650
-输入密码:1234
 ```
 + 将私钥和证书导出成浏览器支持的.p12格式[ca.p12]
 ```bash
@@ -55,7 +53,6 @@ An optional company name []:
 + 自签署证书 [device-cert.pem]
 ```bash
 openssl x509 -req -in device-req.csr -out device-cert.pem -signkey device-key.pem -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -days 3650
-输入密码:1234
 ```
 + 将私钥和证书导出成浏览器支持的.p12格式[device.p12]
 ```bash
@@ -120,12 +117,13 @@ openssl x509 -req -in client-req.csr -out client-cert.pem -signkey client-key.pe
 3. 其他信息可以忽略.
 
 #### 4. 文件使用
+```
 ca-cert.pem                                 [CA证书, 用于client/server]
 server-cert.pem                          [服务端证书/公钥]
 server-key.pem                           [服务端密钥]
 client-cert.pem                           [客户端证书/公钥]
 client-key.pem                            [客户端密钥]
-
+```
 __如果给私钥设置了密码, 如:__
 ```bash
 openssl genrsa -des3 -out server-key.pem 1024
