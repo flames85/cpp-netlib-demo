@@ -68,8 +68,7 @@ void shut_me_down(const std::error_code& error, int signal,
 int main(void) try
 {
     // setup asio::io_service
-    std::shared_ptr<asio::io_service> p_io_service(
-            std::make_shared<asio::io_service>());
+    std::shared_ptr<asio::io_service> p_io_service(std::make_shared<asio::io_service>());
 
     // Initialize SSL context
     std::shared_ptr<asio::ssl::context> ctx = std::make_shared<asio::ssl::context>(asio::ssl::context::sslv23);
@@ -92,14 +91,13 @@ int main(void) try
 
     // setup the async server
     handler request_handler;
-    std::shared_ptr<server> p_server_instance(
-            std::make_shared<server>(server::options(request_handler)
-                                             .address("0.0.0.0")
-                                             .port("3344")
-                                             .io_service(p_io_service)
-                                             .reuse_address(true)
-                                             .thread_pool(std::make_shared<boost::network::utils::thread_pool>(2))
-                                             .context(ctx)));
+    std::shared_ptr<server> p_server_instance(std::make_shared<server>(server::options(request_handler)
+                                                                               .address("0.0.0.0")
+                                                                               .port("3344")
+                                                                               .io_service(p_io_service)
+                                                                               .reuse_address(true)
+                                                                               .thread_pool(std::make_shared<boost::network::utils::thread_pool>(2))
+                                                                               .context(ctx)));
 
     // setup clean shutdown
     asio::signal_set signals(*p_io_service, SIGINT, SIGTERM);

@@ -64,9 +64,8 @@ sudo cp ../deps/asio/asio/include/asio/asio.hpp /opt/cpp-netlib/include
 
 + http_server (http服务)
 + http_client (作为http_server测试客户端)
++ work_queue_http_server(http多线程加队列多线程处理消息服务)
 + file_server (文件下载在服务)
 + file_download (作为file_server测试客户端)
 + ssl_server (https服务)
 + ssl_client (作为ssl_server测试客户端)
-
-
